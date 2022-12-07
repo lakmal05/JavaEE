@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<style>
+    table,th,tr,td{
+        border: 2px solid black;
+    }
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Java EE</title>
+</head>
+<body>
+
+
+<form action="customer" method="post" id="customerForm">
+<!--    ona krna methord eka dnna one-->
+
+
+    <input type="text" placeholder="Id" name="id">
+    <input type="text" placeholder="Name"  name="name">
+    <input type="text" placeholder="Address" name="address">
+    <input type="text" placeholder="Salary" name="salary">
+
+
+    <button>Save</button>
+
+</form>
+
+
+
+<!--servlet ekata form ekkin connect weddi widi 2k thiynwa:-->
+<!--  1. Form eka athultata button ekk dala .action eka widhta servlet eke nama(data ynna ona thana)denna one.-->
+<!--  2. Form eken eliye button ekk thiynwnn. form ekta ID set krla .eliye thiyna button ekta form,formmethird & formaction kiyna attribute denna one-->
+<!--    >mekedi . form eka widhta UI eke ID eka dala , formaction eka widhta servlet eke nama(data ynnna ona than ) denna ona. -->
+<!--        > saha api button ekta methord eka set krnnth one-->
+
+<!--<button form="customerForm" formaction="customer"  formmethord="post" >delete</button>-->
+
+
+
+
+<table style="width:100% ; position: absolute; top: 200px">
+
+    <tr>
+        <th>Person 1</th>
+        <th>Person 2</th>
+        <th>Person 3</th>
+        <th>Person 4</th>
+    </tr>
+
+    <tr>
+        <td>Emil</td>
+        <td>Tobias</td>
+        <td>Linus</td>
+        <td>Linus</td>
+    </tr>
+
+
+    <tr>
+        <td>16</td>
+        <td>14</td>
+        <td>10</td>
+        <td>10</td>
+    </tr>
+
+
+
+
+</table>
+
+
+
+</body>
+</html>

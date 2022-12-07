@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX Xml</title>
+</head>
+<body>
+
+
+<h4 id="display">AJAX</h4>
+
+<!--<form action="customer" method="post" id="customerForm">-->
+
+
+<input type="text" placeholder="Id" name="id">
+<input type="text" placeholder="Name" name="name">
+<input type="text" placeholder="Address" name="address">
+<input type="text" placeholder="Salary" name="salary">
+
+
+<button type="button" id="btnSave">Save</button>
+
+<!--</form>-->
+
+
+<script src="assests/jquery-3.6.1.min.js"></script>
+
+<script>
+
+    /**/
+
+    {
+        // $("#btnSave").click(function (){
+        //     console.log("Strat")
+        //     $.ajax({
+        //         url:"db/db.txt",
+        //
+        //         /*Ajax defult enne asincornes "async: false " ekn sincornes wenwa*/
+        //         // async:false,
+        //
+        //         /*api req krna response eka allgnna thma sucess kiyna methord eka dnne*/
+        //         success:function (res){
+        //             console.log(res);
+        //         $("#display").text(res);
+        //         }
+        //     });
+        //
+        //     console.log("end");
+        // });
+    }
+
+
+    /*Use XML FORMAT to transfer data usig AJAX*/
+
+    $("#btnSave").click(function () {
+
+        $.ajax({
+            url: "db/db.xml",
+
+            // url eke responce tika gnna sucsess ekata dnwa . eetapasse
+
+            success: function (res) {
+                // jqurry obect krgttma passe  qjurr methord invoke krna pulun
+                // console.log(res);
+                /*Travlsing*/
+                let customeCount = $(res).children("customer").children().length;
+                var customers = $(res).children("customer").children();
+                // console.log($(res).children("customer").children())
+
+                for (var i = 0; i < customeCount; i++) {
+
+                    let cutomerId = customers.eq(i).children(":eq(0)").text();
+                    let cutomerName = customers.eq(i).children(":eq(1)").text();
+                    let cutomeraddress = customers.eq(i).children(":eq(2)").text();
+                    let cutomersalary = customers.eq(i).children(":eq(3)").text();
+                }
+
+
+            }
+        });
+
+    });
+
+
+</script>
+</body>
+
+
+</html>

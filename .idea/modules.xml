@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/01_XMLHttp/01_XMLHttpReqs.iml" filepath="$PROJECT_DIR$/01_XMLHttp/01_XMLHttpReqs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AJAX/AJAX.iml" filepath="$PROJECT_DIR$/AJAX/AJAX.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JavaEE_Tomcat.iml" filepath="$PROJECT_DIR$/JavaEE_Tomcat.iml" />
+    </modules>
+  </component>
+</project>

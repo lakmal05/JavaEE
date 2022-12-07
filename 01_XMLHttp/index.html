@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX Xml</title>
+</head>
+<body>
+
+
+
+
+<form action="customer" method="post" id="customerForm">
+
+
+    <input type="text" placeholder="Id" name="id">
+    <input type="text" placeholder="Name"  name="name">
+    <input type="text" placeholder="Address" name="address">
+    <input type="text" placeholder="Salary" name="salary">
+
+
+    <button id="btnSave">Save</button>
+
+</form>
+
+
+
+
+
+</body>
+
+
+<script>
+
+
+    console.log("Strated");
+
+
+    let getReq=new XMLHttpRequest();
+    // XMLHttpRequest object eke thiynw req tika get req ekata gnnwa
+    // .etpase apita get req ekn servers walata req ywnna puluwm
+
+    getReq.open("get","db/db.txt",false);
+
+
+    // get Req ekan defult ynne Asincronexd req ekk.(non-blockin req.line tika run wela wenma late lording tika wenma run krla excute krna req).
+    // false dmma wenne sincrones wenwa .ee kiynne line by line excute wenwa.Diprecated Featur ekk
+
+    console.log("End");
+
+
+
+</script>
+</html>

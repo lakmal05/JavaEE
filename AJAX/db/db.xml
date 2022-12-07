@@ -1,0 +1,27 @@
+<customer>
+    <customer>
+        <id state="true">C001</id>
+        <id state="true">C001</id>
+        <id state="true">C001</id>
+        <id state="true">C001</id>
+    </customer>
+
+    <customer>
+        <id state="true">C001</id>
+        <id state="true">C001</id>
+        <id state="true">C001</id>
+        <id state="true">C001</id>
+    </customer>
+
+<!--    <Item>-->
+<!--        <id state="true">C001</id>-->
+<!--        <name state="true">samsung</name>-->
+<!--        <qty state="true">11</qty>-->
+<!--        <price state="true">100</price>-->
+<!--    </Item>-->
+
+
+</customer>
+
+
+
