@@ -2,10 +2,7 @@ package servelt;
 
 import model.ItemDTO;
 
-import javax.json.Json;
-import javax.json.JsonArrayBuilder;
-import javax.json.JsonObject;
-import javax.json.JsonObjectBuilder;
+import javax.json.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -149,6 +146,47 @@ public class ItemServlet extends HttpServlet {
 //            resp.setStatus(400);
 //        }
 
+
+    }
+
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        /*Form data ekk widhta data ekk ewqoth allagnna puluwn prst methord ekat wirhri puluwn.natttn null ekk enne*/
+//        eka nisa apita form data widhta data giynne nathuwa wena widhtka data req krnna wenwa .eka nisa api JSON type eka use krwna
+
+//   Json waldi ui ekn req krna parameter eka allgnna ."req.getParameter use krnne ba" eka nisa api Json wala thiyna methord ekk use krnwa
+
+        /*"req.getReader"meka argena Json.createReader ekkta dala JsonReader obj ekn Read krgnna one*/
+        JsonReader reader = Json.createReader(req.getReader());
+
+//        data tika  argena store krla dgnna arrya ekk hri object ekk hri hadgnna one,eka json ekk wenna one
+
+        JsonObject itemObj = reader.readObject();
+
+        String id = itemObj.getString("id");
+        String name = itemObj.getString("name");
+        String qty = itemObj.getString("qty");
+        Double price = Double.valueOf(itemObj.getString("price"));
+
+
+        try {
+
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/shop", "root", "1234");
+            PreparedStatement pstm = con.prepareStatement("update item set name=?,qty=?,price=? where id=?");
+            pstm.setObject(4,id);/*mark theese imoirtaant place*/
+            pstm.setObject(1,name);
+            pstm.setObject(2,qty);
+            pstm.setObject(3,price);
+            boolean b = pstm.executeUpdate() > 0;
+
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+      
+    
 
 
     }

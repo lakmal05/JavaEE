@@ -37,7 +37,8 @@
 
 <button type="button" id="btngetAll">getAll</button>
 <button type="button" id="btnAdd">Add</button>
-<button type="button" id="btnDelete">Delte</button>
+<button type="button" id="btnDelete">Delete</button>
+<button type="button" id="btnUpdate">Delte</button>
 
 
 <table style="width:100% ; position: relative; top: 200px">
@@ -87,11 +88,11 @@
 
     $("#btnDelete").click(function () {
 
-        let id=$("#txtItemID").val();
+        let id = $("#txtItemID").val();
 
         $.ajax({
 
-            url: "item?id="+id,
+            url: "item?id=" + id,
 
             method: "delete",
             // data: formData,
@@ -104,6 +105,52 @@
 
 
     });
+
+
+    /*btmUpdate*/
+
+    $("#btnUpdate").click(function () {
+
+
+        let ItemID = $("#txtItemID").val();
+        let ItemName = $("#txtItemName").val();
+        let ItemQty = $("#txtItemQty").val();
+        let ItemPrice = $("#txtItemPrice").val();
+
+        // var formData = $("#itemForm").serialize();
+        // form data ekk widhta put methord allganna bari nisa
+        /*Lilteral base obj ekk hadgena ekta keys values set krgnnwa.Herders wala parts 2i ->Key and Value*/
+        // content header eka wens krnwann mine type eka wens wenna one values welata
+
+        // foces fully jason krnna hduwama keys jason format wenna one.natnn playlod eke wens widhta enneupdate wenne na.req ehder eka applicatoin/json widhta wens wea
+
+        // eka nisa api Json wala thiyna "JSON.stringify(a)" use klaham js literl base obj ekk jason type ekta convert wenwa
+
+        var item = {
+            id: ItemID,
+            name: ItemName,
+            qty: ItemQty,
+            price: ItemPrice,
+        }
+        /*values yanna ona nisa jason obj ekk widhta hadtta.form data ekk widhta put methord allganna bari nisa */
+        // "Json.parase()" walin jason string obj ekk js walta convert wenwa
+
+        $.ajax({
+
+            url: "item",
+            method: "put",
+            contentType:"application/json",
+            data:JSON.stringify(item),
+
+            success:function (req){
+                console.log("update in axj req send")
+            }
+
+
+        })
+
+
+    })
 
 
     $("#btngetAll").click(function () {
