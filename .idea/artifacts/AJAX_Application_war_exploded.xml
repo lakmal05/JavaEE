@@ -1,0 +1,18 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="AJAX_Application:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/AJAX_Application_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="AJAX_Application" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="javax.json-api-1.1.4" />
+          <element id="library" level="project" name="mysql-connector-j-8.0.31" />
+          <element id="library" level="project" name="javax.json-1.1.4" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="AJAX_Application/web/Web" />
+    </root>
+  </artifact>
+</component>
