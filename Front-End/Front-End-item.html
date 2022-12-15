@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<style>
+    table, th, tr {
+        border: 1px solid black;
+    }
+
+</style>
+
+<head>
+    <title>Item jsp file</title>
+</head>
+<body>
+
+
+<form id="itemForm">
+    <label>id</label>
+    <input id="txtItemID" type="text" name="id">
+
+    <label>name</label>
+    <input id="txtItemName" type="text" name="name">
+
+    <label>qty</label>
+    <input id="txtItemQty" type="text" name="qty">
+
+    <label>price</label>
+    <input id="txtItemPrice" type="text" name="price">
+
+
+</form>
+
+<button type="button" id="btngetAll">getAll</button>
+<button type="button" id="btnAdd">Add</button>
+<button type="button" id="btnDelete">Delete</button>
+<button type="button" id="btnUpdate">Update</button>
+
+
+<table style="width:100% ; position: relative; top: 200px">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>QTY</th>
+        <th>Price</th>
+    </tr>
+    </thead>
+    <tbody id="tblItem">
+
+    </tbody>
+
+
+</table>
+
+
+<script src="assets/jquery-3.6.1.min.js"></script>
+
+
+<script>
+
+
+    let baseURL = "http://localhost:8080/Back_End_war_exploded/";
+
+    loadAllItems();
+
+
+    // catch data form table
+    function bindClickRowData() {
+        $("#tblItem>tr").click(function () {
+            let id = $(this).children(":eq(0)").text();
+            let name = $(this).children(":eq(1)").text();
+            let qty = $(this).children(":eq(2)").text();
+            let price = $(this).children(":eq(3)").text();
+            /*if i want--> console.log(id,name)*/
+
+            /*set ip tabel dta values to text fields*/
+            $('#txtItemID').val(id);
+            $('#txtItemName').val(name);
+            $('#txtItemAddress').val(qty);
+            $('#txtItemPrice').val(price);
+
+
+        });
+    }
+
+    function setTextFiledValues(id,name,qty,price){
+        $('#txtItemID').val(id);
+        $('#txtItemName').val(name);
+        $('#txtItemAddress').val(qty);
+        $('#txtItemPrice').val(price);
+
+    }
+
+    /*Item Add Button*/
+    $("#btnAdd").click(function () {
+
+        var formData = $("#itemForm").serialize();
+        // will generate a query String including form data
+
+        //send ajax request to the customer servlet
+        $.ajax({
+            // url: "item?option=add",
+            url: baseURL + "item",
+            method: "post",
+            data: formData,
+            success: function () {
+                console.log("item added")
+
+            }
+        });
+    });
+
+
+    /*btn Delete*/
+
+    $("#btnDelete").click(function () {
+
+        let id = $("#txtItemID").val();
+
+        $.ajax({
+
+            url: baseURL + "item?id=" + id,
+
+            method: "delete",
+            // data: formData,
+            success: function () {
+                console.log("item delte req")
+            }
+
+
+        });
+
+
+    });
+
+
+    /*btmUpdate*/
+
+    $("#btnUpdate").click(function () {
+
+
+        let ItemID = $("#txtItemID").val();
+        let ItemName = $("#txtItemName").val();
+        let ItemQty = $("#txtItemQty").val();
+        let ItemPrice = $("#txtItemPrice").val();
+
+        // var formData = $("#itemForm").serialize();
+        // form data ekk widhta put methord allganna bari nisa
+        /*Lilteral base obj ekk hadgena ekta keys values set krgnnwa.Herders wala parts 2i ->Key and Value*/
+        // content header eka wens krnwann mine type eka wens wenna one values welata
+
+        // foces fully jason krnna hduwama keys jason format wenna one.natnn playlod eke wens widhta enneupdate wenne na.req ehder eka applicatoin/json widhta wens wea
+
+        // eka nisa api Json wala thiyna "JSON.stringify(a)" use klaham js literl base obj ekk jason type ekta convert wenwa
+
+        var item = {
+            id: ItemID,
+            name: ItemName,
+            qty: ItemQty,
+            price: ItemPrice,
+        }
+        /*values yanna ona nisa jason obj ekk widhta hadtta.form data ekk widhta put methord allganna bari nisa */
+        // "Json.parase()" walin jason string obj ekk js walta convert wenwa
+
+        $.ajax({
+
+            url: baseURL + "item",
+            method: "put",
+            contentType: "application/json",
+            data: JSON.stringify(item),
+
+            success: function (req) {
+                console.log("update in axj req send")
+            }
+
+
+        })
+
+
+    })
+
+
+    $("#btngetAll").click(function () {
+
+        loadAllItems();
+
+
+    });
+
+
+    function loadAllItems() {
+
+        bindClickRowData();
+        setTextFiledValues("","","","");
+        $("#txtItemID").focus();
+        $("#tblItem").empty();
+
+        $.ajax({
+
+            url: baseURL + "item",
+            dataType: "json",
+            // method: "get",
+
+            success: function (resp) {
+                console.log("Start data showing send a req to server");
+                console.log(resp)
+                for (let item of resp.data) {
+
+                    var row = '<tr><td>' + item.id + '</td><td>' + item.name + '</td><td>' + item.qty + '</td><td>' + item.price + '</td></tr>';
+                    $("#tblItem").append(row);
+                }
+                bindClickRowData();
+                setTextFiledValues("","","","");
+                $("#txtItemID").focus();
+
+
+            }
+
+        });
+    }
+
+
+</script>
+
+
+</body>
+</html>

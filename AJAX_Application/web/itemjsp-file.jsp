@@ -38,7 +38,7 @@
 <button type="button" id="btngetAll">getAll</button>
 <button type="button" id="btnAdd">Add</button>
 <button type="button" id="btnDelete">Delete</button>
-<button type="button" id="btnUpdate">Delte</button>
+<button type="button" id="btnUpdate">Update</button>
 
 
 <table style="width:100% ; position: relative; top: 200px">
@@ -139,10 +139,10 @@
 
             url: "item",
             method: "put",
-            contentType:"application/json",
-            data:JSON.stringify(item),
+            contentType: "application/json",
+            data: JSON.stringify(item),
 
-            success:function (req){
+            success: function (req) {
                 console.log("update in axj req send")
             }
 
@@ -155,29 +155,36 @@
 
     $("#btngetAll").click(function () {
 
-            $("#tblItem").empty();
+       loadAllItems();
 
-            $.ajax({
 
-                    url: "item",
-                    dataType: "json",
-                    // method: "get",
+        });
 
-                    success: function (resp) {
-                        console.log("data showing")
-                        console.log(resp)
-                        for (let item of resp) {
 
-                            var row = '<tr><td>' + item.id + '</td><td>' + item.name + '</td><td>' + item.qty + '</td><td>' + item.price + '</td></tr>';
-                            $("#tblItem").append(row);
-                        }
-                    }
+
+
+
+
+    function loadAllItems(){
+        $("#tblItem").empty();
+
+        $.ajax({
+
+            url: "item",
+            dataType: "json",
+            // method: "get",
+
+            success: function (resp) {
+                console.log("Start data showing send a req to server");
+                console.log(resp)
+                for (let item of resp.data) {
+
+                    var row = '<tr><td>' + item.id + '</td><td>' + item.name + '</td><td>' + item.qty + '</td><td>' + item.price + '</td></tr>';
+                    $("#tblItem").append(row);
                 }
-            );
+            }
 
-
-        }
-    );
+        }); }
 
 
 </script>

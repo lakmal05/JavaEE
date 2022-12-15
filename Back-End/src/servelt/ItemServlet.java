@@ -1,7 +1,5 @@
 package servelt;
 
-import model.ItemDTO;
-
 import javax.json.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
 
 @WebServlet(urlPatterns = "/item")
 
@@ -22,8 +19,10 @@ public class ItemServlet extends HttpServlet {
 
 
 //        ArrayList<ItemDTO> allItems = new ArrayList();
-
-
+    resp.addHeader("Access-Control-Allow-Origin","*");
+//
+//    strar mark ekk kiynne on origin(local host )mona ekkkin req awth acces krnna kiyla.onnm-->
+//                resp.addHeader("Access-Control-Allow-Origin","http://localhost:1222/");
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/shop", "root", "1234");
@@ -82,7 +81,7 @@ public class ItemServlet extends HttpServlet {
         String qty = req.getParameter("qty");
         Double price = Double.valueOf(req.getParameter("price"));
 
-
+        resp.addHeader("Access-Control-Allow-Origin","*");
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/shop", "root", "1234");
@@ -116,7 +115,7 @@ public class ItemServlet extends HttpServlet {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/shop", "root", "1234");
             PreparedStatement pstm = con.prepareStatement("delete from item where id=?");
             pstm.setObject(1, id);
-
+            resp.addHeader("Access-Control-Allow-Origin","*");
             boolean execute = pstm.executeUpdate() > 0;
         } catch (SQLException | ClassNotFoundException throwables) {
             throwables.printStackTrace();
@@ -170,7 +169,7 @@ public class ItemServlet extends HttpServlet {
         String qty = itemObj.getString("qty");
         Double price = Double.valueOf(itemObj.getString("price"));
 
-
+        resp.addHeader("Access-Control-Allow-Origin","*");
         try {
 
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -186,7 +185,23 @@ public class ItemServlet extends HttpServlet {
             e.printStackTrace();
         }
       
-    
+
+
+
+
+
+
+
+    }
+
+
+    @Override
+    protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        /*Do option use krnne prfligt error ekk sdaha .*/
+
+        resp.addHeader("Access-Control-Allow-Origin","*");
+        resp.addHeader("Access-Control-Allow-Methods","DELETE,PUT");
+        resp.addHeader("Access-Control-Allow-Headers","Content-Type");
 
 
     }
